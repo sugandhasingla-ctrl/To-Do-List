@@ -8,6 +8,6 @@
 </ul>
 
 <h2>Add New Task</h2>
-<input type="text" placeholder="Task title" value={{this.newTaskTitle}} oninput={{action (mut this.newTaskTitle) value="target.value"}} />
+<input type="text" placeholder="Task title" value={{this.newTaskTitle}} on "input" = {{action (mut this.newTaskTitle) value="target.value"}} />
 <button {{on "click" this.addTask}}>Add Task</button>
 </div>

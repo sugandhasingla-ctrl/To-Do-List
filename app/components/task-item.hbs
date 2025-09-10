@@ -10,7 +10,7 @@
 <div>
 {{!-- Task title and completion status --}}
 <div class="task-item">
-  <input type="checkbox" checked={{this.task.completed}} onchange={{action "toggleCompletion"}}>
+  <input type="checkbox" checked={{this.task.completed}} on "change"= {{action "toggleCompletion"}}>
   <span class={{if this.task.completed "completed"}}>{{this.task.title}}</span>
 
   <button {{on "click" (fn this.editTask this.task.id)}}>Edit</button>
