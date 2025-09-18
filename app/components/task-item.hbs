@@ -1,19 +1,26 @@
-<div>
-<h1>task-item.hbs</h1>
-<p>This file contains the Handlebars template for the TaskItem component.</p>
-</div>
-
-<div>
-<h2>Contents:</h2>
-</div>
-
-<div>
-{{!-- Task title and completion status --}}
 <div class="task-item">
-  <input type="checkbox" checked={{this.task.completed}} on "change"= {{action "toggleCompletion"}}>
-  <span class={{if this.task.completed "completed"}}>{{this.task.title}}</span>
+  {{!-- Toggle completion --}}
+  <input
+     type="checkbox"
+     checked={{@task.completed}}
+     {{on "change" (fn @onEdit @task.id (not @task.completed))}}
+  >
 
-  <button {{on "click" (fn this.editTask this.task.id)}}>Edit</button>
-  <button {{on "click" (fn this.deleteTask this.task.id)}}>Delete</button>
-</div>
+  {{!-- Task title --}}
+  <span class={{if @task.completed "completed"}}>{{@task.title}}</span>
+
+  {{!-- Edit task --}}
+  <button {{on "click" (fn (async (taskId, taskTitle) => {
+    let newTitle = prompt("Edit task title", @task.title);
+    if (newTitle !== null) {
+      @onEdit(taskId, newTitle);
+    }
+  })  @task.id @task.title)}}>
+     Edit
+  </button>
+
+  {{!-- Delete task --}}
+  <button {{on "click" (fn @onDelete @task.id)}}>
+    Delete
+  </button>
 </div>

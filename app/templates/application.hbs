@@ -3,11 +3,20 @@
 <h2>Task List</h2>
 <ul>
   {{#each this.tasks as |task|}}
-    <TaskItem @task={{task}} @onEdit={{this.editTask}} @onDelete={{this.deleteTask}} />
+    <TaskItem
+    @task={{task}}
+    @onEdit={{this.editTask}}
+    @onDelete={{this.deleteTask}}
+/>
   {{/each}}
 </ul>
 
 <h2>Add New Task</h2>
-<input type="text" placeholder="Task title" value={{this.newTaskTitle}} on "input" = {{action (mut this.newTaskTitle) value="target.value"}} />
+<input
+   type="text"
+   placeholder="Task title"
+   value={{this.newTaskTitle}}
+   {{on "input" this.updateNewTaskTitle}}
+/>
 <button {{on "click" this.addTask}}>Add Task</button>
 </div>
