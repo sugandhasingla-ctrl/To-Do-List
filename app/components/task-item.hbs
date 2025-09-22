@@ -1,26 +1,21 @@
 <div class="task-item">
   {{!-- Toggle completion --}}
   <input
-     type="checkbox"
-     checked={{@task.completed}}
-     {{on "change" (fn @onEdit @task.id (not @task.completed))}}
-  >
+    type="checkbox"
+    checked={{@task.completed}}
+    {{on "change" (fn this.toggleCompletion @task)}}
+  />
 
   {{!-- Task title --}}
   <span class={{if @task.completed "completed"}}>{{@task.title}}</span>
 
   {{!-- Edit task --}}
-  <button {{on "click" (fn (async (taskId, taskTitle) => {
-    let newTitle = prompt("Edit task title", @task.title);
-    if (newTitle !== null) {
-      @onEdit(taskId, newTitle);
-    }
-  })  @task.id @task.title)}}>
-     Edit
+  <button {{on "click" (fn this.editTask @task)}}>
+   Edit
   </button>
 
   {{!-- Delete task --}}
-  <button {{on "click" (fn @onDelete @task.id)}}>
+  <button {{on "click" (fn this.deleteTask @task)}}>
     Delete
   </button>
 </div>

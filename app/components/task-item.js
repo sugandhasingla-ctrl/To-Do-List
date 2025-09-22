@@ -1,14 +1,22 @@
-export default class TaskItem extends Component {
-  @tracked title = '';
-  @tracked completed = false;
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
 
+export default class TaskItem extends Component {
   @action
-  editTask(newTitle) {
-    this.title = newTitle;
+  editTask(task) {
+    let newTitle = prompt("Edit task title", task.title);
+    if (newTitle !== null) {
+      this.args.onEdit(task.id, newTitle);
+    }
   }
 
   @action
-  deleteTask() {
-    this.args.onDelete(this.args.task.id);
+  toggleCompletion(task) {
+    this.args.onToggle(task.id);
+  }
+
+  @action
+  deleteTask(task) {
+    this.args.onDelete(task.id);
   }
 }
